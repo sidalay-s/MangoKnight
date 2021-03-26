@@ -5,6 +5,10 @@ Player::Player(std::string name)
     std::cout << '\n' << name << " has entered the battle!!!!" << std::endl;
 }
 
+std::string Player::getPlayerName() const {
+    return name;
+}
+
 int Player::getHP() const {
     return hp;
 }

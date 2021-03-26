@@ -1,9 +1,16 @@
 #include "player.hpp"
+#include <random>
+#include <ctime>
 
-int PlayerTurn(Player& player, Player& enemy);
+std::mt19937 engine (time(nullptr));
+
+int UserTurn(Player& player, Player& enemy);
 int EnemyTurn(Player& player, Player& enemy);
+void Battle(Player& player, Player& enemy);
 
 int main() {
+
+
     std::cout << "Welcome to the Mango battle arena!" << std::endl;
 
     std::string PlayerName{};
@@ -19,19 +26,11 @@ int main() {
     
     Player Enemy{EnemyName};
 
-    while (true) {
-        if (PlayerTurn(Mango, Enemy) <= 0) {
-            std::cout << "\nYou have WON! " << PlayerName << " is victorious!!" << std::endl;
-            break;
-        }
-        if (EnemyTurn(Mango, Enemy) <= 0) {
-            std::cout << "\nYou have LOST! " << EnemyName << " has kicked your butt!!" << std::endl;
-            break;
-        }
-    }        
+    Battle(Mango, Enemy);
+     
 }
 
-int PlayerTurn(Player& player, Player& enemy) {
+int UserTurn(Player& player, Player& enemy) {
     char UserInput;
     
     std::cout << "\nChoose your action: \n"
@@ -42,16 +41,16 @@ int PlayerTurn(Player& player, Player& enemy) {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         switch (UserInput) {
             case '1':
-                std::cout << "\nPlayer uses punch!" << std::endl;
+                std::cout << "\n" << player.getPlayerName() << " uses punch!" << std::endl;
                 player.Punch(enemy);
                 break;
             case '2':
-                std::cout << "\nPlayer uses kick!" << std::endl;
+                std::cout << "\n" << player.getPlayerName() << " uses kick!" << std::endl;
                 player.Kick(enemy);
                 break;
             default:
                 std::cout << "Invalid input. Try again\n" << std::endl;
-                PlayerTurn(player, enemy);
+                UserTurn(player, enemy);
         }
     }
 
@@ -59,11 +58,11 @@ int PlayerTurn(Player& player, Player& enemy) {
     //     std::cin.clear();
     //     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     //     std::cout << "\nInvalid input. Please try again" << std::endl;
-    //     PlayerTurn(player, enemy);
+    //     UserTurn(player, enemy);
     // }
 
     else {
-        PlayerTurn(player, enemy);
+        UserTurn(player, enemy);
     }
 
     return enemy.getHP();
@@ -71,8 +70,33 @@ int PlayerTurn(Player& player, Player& enemy) {
 
 int EnemyTurn(Player& player, Player& enemy) {
 
-    std::cout << "\nEnemy uses bite!" << std::endl;
-    enemy.Bite(player);
+    std::uniform_int_distribution<int> distribution{1,2};
+    int enemyInput {distribution(engine)};
+    std::cout << '\n' << enemyInput << std::endl;
+
+    switch (enemyInput) {
+        case 1:
+            std::cout << "\n" << enemy.getPlayerName() << " uses scratch!" << std::endl;
+            enemy.Scratch(player);
+            break;
+        case 2:
+            std::cout << "\n" << enemy.getPlayerName() << " uses bite!" << std::endl;
+            enemy.Bite(player);
+            break;
+    }
+
     return player.getHP();
 }
     
+void Battle(Player& player, Player& enemy) {
+    while (true) {
+        if (UserTurn(player, enemy) <= 0) {
+            std::cout << "\nYou have WON! " << player.getPlayerName() << " is victorious!!" << std::endl;
+            break;
+        }
+        if (EnemyTurn(player, enemy) <= 0) {
+            std::cout << "\nYou have LOST! " << enemy.getPlayerName() << " has kicked your butt!!" << std::endl;
+            break;
+        }
+    }   
+}

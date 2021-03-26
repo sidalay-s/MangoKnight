@@ -33,6 +33,7 @@ public:
     // 1-arg ctor
     Player(std::string name);
     // getter
+    std::string getPlayerName() const;
     int getHP() const;
 
     // player abilities
