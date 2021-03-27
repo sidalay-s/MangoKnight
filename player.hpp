@@ -15,7 +15,9 @@ private:
 public:
     // 1-arg ctor
     Player(std::string name);
-    // getter
+    // setters
+    
+    // getters
     std::string getPlayerName() const;
     int getHP() const;
 
@@ -28,6 +30,7 @@ public:
     int Bite(Player& player);
 
     int SetDamageModifier(int min, int max);
+    void DisplayBattle(std::string_view Action, int Damage, Player& Player) const;
 };
 
 #endif // PLAYER_HPP

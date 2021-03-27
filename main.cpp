@@ -18,13 +18,12 @@ int main() {
 
     Player Mango{PlayerName};
     
-    std::cout << "\nEnter the name of the one you despise the most: ";
+    std::cout << "\nEnter the name of your mortal enemy: ";
     std::cin >> EnemyName;
     
     Player Enemy{EnemyName};
 
     Battle(Mango, Enemy);
-     
 }
 
 int UserTurn(Player& player, Player& enemy) {
@@ -82,14 +81,29 @@ int EnemyTurn(Player& player, Player& enemy) {
 }
     
 void Battle(Player& player, Player& enemy) {
+    std::uniform_int_distribution<int> Turnbase{1,2};
+    int HeadsTails {Turnbase(seed)};
+    
     while (true) {
-        if (UserTurn(player, enemy) <= 0) {
-            std::cout << "\nYou have WON! " << player.getPlayerName() << " is victorious!!" << std::endl;
-            break;
+        if (HeadsTails == 1) {
+            if (UserTurn(player, enemy) <= 0) {
+                std::cout << "\nYou have WON! " << player.getPlayerName() << " is victorious!!" << std::endl;
+                break;
+            }
+            if (EnemyTurn(player, enemy) <= 0) {
+                std::cout << "\nYou have LOST! " << enemy.getPlayerName() << " has kicked your butt!!" << std::endl;
+                break;
+            }
         }
-        if (EnemyTurn(player, enemy) <= 0) {
-            std::cout << "\nYou have LOST! " << enemy.getPlayerName() << " has kicked your butt!!" << std::endl;
-            break;
+        else {
+            if (EnemyTurn(player, enemy) <= 0) {
+                std::cout << "\nYou have LOST! " << enemy.getPlayerName() << " has kicked your butt!!" << std::endl;
+                break;
+            }
+            if (UserTurn(player, enemy) <= 0) {
+                std::cout << "\nYou have WON! " << player.getPlayerName() << " is victorious!!" << std::endl;
+                break;
+            }
         }
     }   
 }
