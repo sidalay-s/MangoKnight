@@ -1,15 +1,12 @@
 #include "player.hpp"
-#include <random>
-#include <ctime>
-
-std::mt19937 engine (time(nullptr));
 
 int UserTurn(Player& player, Player& enemy);
 int EnemyTurn(Player& player, Player& enemy);
 void Battle(Player& player, Player& enemy);
 
-int main() {
+std::mt19937 seed (time(nullptr));
 
+int main() {
 
     std::cout << "Welcome to the Mango battle arena!" << std::endl;
 
@@ -41,11 +38,9 @@ int UserTurn(Player& player, Player& enemy) {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         switch (UserInput) {
             case '1':
-                std::cout << "\n" << player.getPlayerName() << " uses punch!" << std::endl;
                 player.Punch(enemy);
                 break;
             case '2':
-                std::cout << "\n" << player.getPlayerName() << " uses kick!" << std::endl;
                 player.Kick(enemy);
                 break;
             default:
@@ -71,16 +66,14 @@ int UserTurn(Player& player, Player& enemy) {
 int EnemyTurn(Player& player, Player& enemy) {
 
     std::uniform_int_distribution<int> distribution{1,2};
-    int enemyInput {distribution(engine)};
-    std::cout << '\n' << enemyInput << std::endl;
+    int enemyInput {distribution(seed)};
+    // std::cout << '\n' << enemyInput << std::endl;
 
     switch (enemyInput) {
         case 1:
-            std::cout << "\n" << enemy.getPlayerName() << " uses scratch!" << std::endl;
             enemy.Scratch(player);
             break;
         case 2:
-            std::cout << "\n" << enemy.getPlayerName() << " uses bite!" << std::endl;
             enemy.Bite(player);
             break;
     }

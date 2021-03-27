@@ -4,25 +4,8 @@
 #include <string>
 #include <iostream>
 #include <limits>
-
-/*
-    Player class
-        Attributes
-            - Name, HP
-        Player Methods
-            - punch, kick, block
-        Enemy Methods
-            - scratch, bite
-
-    - Create Menu
-        - Name character 
-        - Name enemy
-
-    - Allow the player to choose which ability to use.
-        - pass in enemy object by reference
-    - Whoever gets to 0 health first loses
-        - Check health after every 'turn'
-*/
+#include <random>
+#include <ctime>
 
 class Player {
 
@@ -44,6 +27,26 @@ public:
     int Scratch(Player& player);
     int Bite(Player& player);
 
+    int SetDamageModifier(int min, int max);
 };
 
 #endif // PLAYER_HPP
+
+/*
+    Player class
+        Attributes
+            - Name, HP
+        Player Methods
+            - punch, kick, block
+        Enemy Methods
+            - scratch, bite
+
+    - Create Menu
+        - Name character 
+        - Name enemy
+
+    - Allow the player to choose which ability to use.
+        - pass in enemy object by reference
+    - Whoever gets to 0 health first loses
+        - Check health after every 'turn'
+*/
