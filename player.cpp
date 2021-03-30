@@ -4,11 +4,22 @@ std::mt19937 seeds(time(nullptr));
 
 std::string SeparatingLine {"-----------------------------------"};
 
+// Constructor
 Player::Player(std::string name)
     : name{name}, hp{100} {
-    std::cout << '\n' << name << " has entered the battle!!!!" << std::endl;
+    std::cout << '\n' << name << " has entered the battle!!!!\n";
 }
 
+// Setters
+void Player::setPlayerName(std::string name) {
+    this->name = name;
+}
+
+void Player::setPlayerHp(int hp) {
+    this->hp = hp;
+}
+
+// Getters
 std::string Player::getPlayerName() const {
     return name;
 }
@@ -17,7 +28,7 @@ int Player::getHP() const {
     return hp;
 }
 
-int Player::SetDamageModifier(int min, int max) {
+int Player::GetDamageModifier(int min, int max) {
     std::uniform_int_distribution DamageRange{min, max};
     int Damage{DamageRange(seeds)};
     return Damage;
@@ -25,33 +36,36 @@ int Player::SetDamageModifier(int min, int max) {
 
 void Player::DisplayBattle(std::string_view Action, int Damage, Player& Player) const {
     std::cout << SeparatingLine << '\n' << this->name << " uses " << Action << " for " << Damage << " damage!\n";
-    std::cout << Player.name << " has " << Player.hp << " hp left!\n" << SeparatingLine << std::endl;
+    std::cout << Player.name << " has " << Player.hp << " hp left!\n" << SeparatingLine << '\n';
+}
+
+bool Player::isDead(Player& player) const {
+    if (player.hp <= 0)
+        return true;
+    else 
+        return false;
+}
+
+int Player::Attack(Player& player, int min, int max, std::string_view AtkType) {
+    int Damage(GetDamageModifier(min, max));
+    player.hp -= Damage;
+    if (isDead(player)) {player.hp = 0;}
+    DisplayBattle(AtkType, Damage, player);
+    return player.hp;
 }
 
 int Player::Punch(Player& enemy) {
-    int PunchDamage{SetDamageModifier(5,10)};
-    enemy.hp -= PunchDamage;
-    DisplayBattle("PUNCH", PunchDamage, enemy);
-    return enemy.hp;
+    return Attack(enemy, 5, 10, "PUNCH");
 }
 
 int Player::Kick(Player& enemy) {
-    int KickDamage{SetDamageModifier(1,20)};
-    enemy.hp -= KickDamage;
-    DisplayBattle("KICK", KickDamage, enemy);
-    return enemy.hp;
+    return Attack(enemy, 1, 20, "KICK");
 }
 
 int Player::Scratch(Player& player) {
-    int ScratchDamage{SetDamageModifier(6,9)};
-    player.hp -= ScratchDamage;
-    DisplayBattle("SCRATCH", ScratchDamage, player);
-    return player.hp;
+    return Attack(player, 6, 9, "SCRATCH");
 }
 
 int Player::Bite(Player& player) {
-    int BiteDamage{SetDamageModifier(5,15)};
-    player.hp -= BiteDamage;
-    DisplayBattle("BITE", BiteDamage, player);
-    return player.hp;
+    return Attack(player, 5, 15, "BITE");
 }

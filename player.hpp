@@ -16,10 +16,21 @@ public:
     // 1-arg ctor
     Player(std::string name);
     // setters
-    
+    void setPlayerName(std::string name);
+    void setPlayerHp(int hp);
     // getters
     std::string getPlayerName() const;
     int getHP() const;
+
+    enum class Element {Fire, Water, Air, Earth, Ice};
+
+    enum class Spell {};
+
+    enum class Buff {IceArmor, FireArmor, };
+
+    enum class Debuff {Wet, Burn, Bleed, Frozen, Stunned};
+
+    int Attack(Player& player, int min, int max, std::string_view AtkType);
 
     // player abilities
     int Punch(Player& enemy);
@@ -29,8 +40,10 @@ public:
     int Scratch(Player& player);
     int Bite(Player& player);
 
-    int SetDamageModifier(int min, int max);
+    int GetDamageModifier(int min, int max);
     void DisplayBattle(std::string_view Action, int Damage, Player& Player) const;
+
+    bool isDead(Player& player) const;
 };
 
 #endif // PLAYER_HPP

@@ -31,7 +31,7 @@ int UserTurn(Player& player, Player& enemy) {
     
     std::cout << "\nChoose your action: \n"
               << "1. Punch\n"
-              << "2. Kick\n" << std::endl;
+              << "2. Kick\n\n";
 
     if (std::cin >> UserInput) {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -43,7 +43,7 @@ int UserTurn(Player& player, Player& enemy) {
                 player.Kick(enemy);
                 break;
             default:
-                std::cout << "Invalid input. Try again\n" << std::endl;
+                std::cout << "Invalid input. Try again\n\n";
                 UserTurn(player, enemy);
         }
     }
@@ -83,6 +83,11 @@ int EnemyTurn(Player& player, Player& enemy) {
 void Battle(Player& player, Player& enemy) {
     std::uniform_int_distribution<int> Turnbase{1,2};
     int HeadsTails {Turnbase(seed)};
+
+    if (HeadsTails == 1)
+        std::cout << '\n' << player.getPlayerName() << " makes the first move!\n";
+    else 
+        std::cout << '\n' << enemy.getPlayerName() << " makes the first move!\n";
     
     while (true) {
         if (HeadsTails == 1) {
