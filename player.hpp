@@ -10,25 +10,17 @@
 class Player {
 
 private:
-    std::string name;
+    const std::string name;
     int hp;
 public:
     // 1-arg ctor
     Player(std::string name);
     // setters
-    void setPlayerName(std::string name);
-    void setPlayerHp(int hp);
+    // void setPlayerName(std::string name);
+    // void setPlayerHp(int hp);
     // getters
     std::string getPlayerName() const;
     int getHP() const;
-
-    enum class Element {Fire, Water, Air, Earth, Ice};
-
-    enum class Spell {};
-
-    enum class Buff {IceArmor, FireArmor, };
-
-    enum class Debuff {Wet, Burn, Bleed, Frozen, Stunned};
 
     int Attack(Player& player, int min, int max, std::string_view AtkType);
 

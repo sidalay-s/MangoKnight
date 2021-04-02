@@ -11,13 +11,13 @@ Player::Player(std::string name)
 }
 
 // Setters
-void Player::setPlayerName(std::string name) {
-    this->name = name;
-}
+// void Player::setPlayerName(std::string name) {
+//     this->name = name;
+// }
 
-void Player::setPlayerHp(int hp) {
-    this->hp = hp;
-}
+// void Player::setPlayerHp(int hp) {
+//     this->hp = hp;
+// }
 
 // Getters
 std::string Player::getPlayerName() const {
