@@ -15,9 +15,6 @@ private:
 public:
     // 1-arg ctor
     Player(std::string name);
-    // setters
-    // void setPlayerName(std::string name);
-    // void setPlayerHp(int hp);
     // getters
     std::string getPlayerName() const;
     int getHP() const;

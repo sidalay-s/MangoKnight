@@ -10,15 +10,6 @@ Player::Player(std::string name)
     std::cout << '\n' << name << " has entered the battle!!!!\n";
 }
 
-// Setters
-// void Player::setPlayerName(std::string name) {
-//     this->name = name;
-// }
-
-// void Player::setPlayerHp(int hp) {
-//     this->hp = hp;
-// }
-
 // Getters
 std::string Player::getPlayerName() const {
     return name;

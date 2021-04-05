@@ -4,8 +4,6 @@ std::mt19937 seed (time(nullptr));
 
 int main() {
 
-    std::cout << "Welcome to the Mango battle arena!\n";
-
     std::string PlayerName{};
     std::string EnemyName{};
 
