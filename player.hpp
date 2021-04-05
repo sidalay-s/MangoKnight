@@ -6,6 +6,7 @@
 #include <limits>
 #include <random>
 #include <ctime>
+#include "spellbook.hpp"
 
 class Player {
 
