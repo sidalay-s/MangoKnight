@@ -1,27 +1,32 @@
 #include "element.hpp"
 #include <iostream>
+#include <stdexcept>
 
-Element::Element(Raw Type) 
+Element::Element(Raw Type)
     : Type{Type}, RawDamage{[Type] {
-        int Damage{};
         switch (Type) {
             case Raw::Fire: 
-                Damage = 10;
-                break;
+                return 10;
             case Raw::Water:
-                Damage = 7;
-                break;
+                return 7;
             case Raw::Air:
-                Damage = 6;
-                break;
+                return 6;
             case Raw::Earth:
-                Damage = 9;
-                break;
+                return 9;
             case Raw::Ice:
-                Damage = 8;
-                break;
+                return 8;
+            default:
+                throw std::runtime_error{"Something went wrong with Element class constructor. Raw type was not defined."};
+                return 0;
         }
-    return Damage;
     }()} {
     std::cout << this->RawDamage << '\n';
+}
+
+Element::Raw Element::GetType() const {
+    return this->Type;
+}
+
+int Element::GetRawDamage() const {
+    return this->RawDamage;
 }
