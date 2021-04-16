@@ -15,6 +15,7 @@ public:
     Element(Raw Type);
     Raw GetType() const;
     int GetRawDamage() const;
+    Element operator+(const Element& rhs);
 }; 
 
 #endif // ELEMENT_HPP
@@ -26,6 +27,11 @@ public:
     - ? allow to discard all unused elements to get a whole new assortment next turn ?
     - 'Phase' used to represent a complete multi-turn sequence ?
     - ? when battle commences, each player's actions should be played out simultaneously ?
+    - ? 1 minute per turn ?
+    - ? 4 phases ? 
+
+    ELEMENT [TODO]
+
 
     SPELLS [TODO]
     - ? do we need to make Element-type class ?
@@ -55,4 +61,8 @@ public:
     - ? Environmental statuses ?
         - ? Ice map - ice elemental benefits ?
     
+    STORY [TODO]
+    - World of magic
+    - Mages looking for power are seeking out legendary artifacts
+    - Source of mages power is dependent on their 'resonance' 
 */

@@ -6,34 +6,68 @@
 #include <limits>
 #include <random>
 #include <ctime>
-#include "spellbook.hpp"
+#include "resonance.hpp"
+
+struct PlayerStats {
+    size_t XP{};
+    size_t Level{};
+    size_t Rank{};
+
+    size_t DamageCounter{};
+    bool IsWinner;
+
+    size_t MatchCount{};
+    size_t Wins{};
+    size_t Losses{};
+    size_t WinRate{};
+
+    size_t FireUseCount{};
+    size_t WaterUseCount{};
+    size_t AirUseCount{};
+    size_t EarthUseCount{};
+    size_t IceUseCount{};
+    size_t ShadowUseCount{};
+
+    Element::Raw FavoriteElement{};
+};
 
 class Player {
 
 private:
-    const std::string name;
-    int hp;
+    const std::string Name;
+    int HP;
+    Resonance Draw;
+    PlayerStats Statistics;
 public:
     // 1-arg ctor
     Player(std::string name);
     // getters
-    std::string getPlayerName() const;
-    int getHP() const;
+    std::string GetPlayerName() const;
+    int GetHP() const;
+    bool IsDead(Player& player) const;
+    void GainXP();
+    void CheckXP();
+    void LevelUp();
+    void CastSpell();
 
-    int Attack(Player& player, int min, int max, std::string_view AtkType);
+    void Steam();
+    void Fireball();
 
-    // player abilities
-    int Punch(Player& enemy);
-    int Kick(Player& enemy); 
 
-    // enemy abilities
-    int Scratch(Player& player);
-    int Bite(Player& player);
+    // int Attack(Player& player, int min, int max, std::string_view AtkType);
 
-    int GetDamageModifier(int min, int max);
-    void DisplayBattle(std::string_view Action, int Damage, Player& Player) const;
+    // // player abilities
+    // int Punch(Player& enemy);
+    // int Kick(Player& enemy); 
 
-    bool isDead(Player& player) const;
+    // // enemy abilities
+    // int Scratch(Player& player);
+    // int Bite(Player& player);
+
+    // int GetDamageModifier(int min, int max);
+    // void DisplayBattle(std::string_view Action, int Damage, Player& Player) const;
+
+    
 };
 
 #endif // PLAYER_HPP
@@ -55,8 +89,8 @@ public:
     CHARACTER [TODO]
     - Players have a profile and mage with access to: 
         {statistics}
-        {match history}
         {ranking}
+        {match history}
         {? talent trees ?} 
         {customizable outfits} *PURELY COSMETIC*
             - 4 piece armor (head, body, legs, arms)
@@ -73,7 +107,11 @@ public:
     MAPS [TODO]
     - ? Environmental statuses ?
         - ? Ice map - ice elemental benefits ?
-    
+
+    STORY [TODO]
+    - World of magic
+    - Mages looking for power are seeking out legendary artifacts
+    - Source of mages power is dependent on their 'resonance' 
 */
 
 /*

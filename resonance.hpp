@@ -1,9 +1,9 @@
-#ifndef SPELLBOOK_HPP
-#define SPELLBOOK_HPP
+#ifndef RESONANCE_HPP
+#define RESONANCE_HPP
 #include <vector>
 #include "element.hpp"
 
-class Spellbook {
+class Resonance {
 private:
     std::vector <Element> Spells{}; 
 
@@ -11,7 +11,7 @@ public:
     
 };
 
-#endif // SPELLBOOK_HPP
+#endif // RESONANCE_HPP
 
 /*
     PHASES [TODO]
@@ -48,5 +48,10 @@ public:
     MAPS [TODO]
     - ? Environmental statuses ?
         - ? Ice map - ice elemental benefits ?
-    
+
+    STORY [TODO]
+    - World of magic
+    - Mages looking for power are seeking out legendary artifacts
+    - Source of mages power is dependent on their 'resonance' 
 */
+
